@@ -5,7 +5,7 @@ import os, re, yaml, subprocess, glob, shutil
 def slugify(s):
     s = s.lower()
     for c in [' ', '-', '.', '/']:
-		s = s.replace(c, '_')
+      s = s.replace(c, '_')
     s = re.sub('\W', '', s)
     s = s.replace('_', ' ')
     s = re.sub('\s+', ' ', s)
@@ -30,7 +30,7 @@ def buildPropertyString(params):
 	
 def makeExecutable(path):
     mode = os.stat(path).st_mode
-    mode |= (mode & 0444) >> 2    # copy R bits to X
+    mode |= (mode & 444) >> 2    # copy R bits to X
     os.chmod(path, mode)
 
 
@@ -131,7 +131,7 @@ for name,repo in schemes.items():
 
 for scheme_file in glob.glob('schemes/*/*.yaml'):
 	current_scheme = yaml.load(open(scheme_file, 'r'))
-	print "Procesing " + current_scheme['scheme']
+	print ("Procesing " + current_scheme['scheme'])
 	processfile(current_scheme)
 
 
